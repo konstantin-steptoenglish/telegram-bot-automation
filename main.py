@@ -1,4 +1,4 @@
-﻿from telegram.ext import Application
+from telegram.ext import Application
 from telegram import Bot
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -34,7 +34,7 @@ class TelegramBot:
         else:
             logger.warning("Post rejected - red flags detected")
     
-    def start(self):
+        def start(self):
         self.scheduler.add_job(
             self.publish_scholarship_post,
             'cron',
@@ -54,11 +54,16 @@ class TelegramBot:
         self.scheduler.start()
         logger.info("Bot started and scheduler running")
         try:
-            asyncio.get_event_loop().run_forever()
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            loop.run_forever()
         except KeyboardInterrupt:
             self.scheduler.shutdown()
             logger.info("Bot stopped")
 
+
 if __name__ == "__main__":
     bot = TelegramBot()
     bot.start()
+
+
