@@ -38,8 +38,8 @@ class TelegramBot:
         try:
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
-            self.scheduler.add_job(self.publish_scholarship_post, 'cron', hour=8, minute=0, timezone=TIMEZONE, id='scholarship_post')
-            self.scheduler.add_job(self.publish_lifehack_post, 'cron', hour=14, minute=30, timezone=TIMEZONE, id='lifehack_post')
+            self.scheduler.add_job(self.publish_scholarship_post, 'cron', hour=0, minute=2, timezone=TIMEZONE, id='scholarship_post')
+            self.scheduler.add_job(self.publish_lifehack_post, 'cron', hour=0, minute=4, timezone=TIMEZONE, id='lifehack_post')
             self.scheduler.start()
             logger.info('Bot started and scheduler running')
             loop.run_forever()
